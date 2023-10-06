@@ -10,12 +10,12 @@ export class CatsService {
   constructor(
     @InjectRepository(Cat)
     private readonly catRepository: Repository<Cat>,
-  ) {
-    
-  }
+  ) {}
 
   async create(createCatDto: CreateCatDto) {
-    return 'This action adds a new cat';
+    const cat = this.catRepository.create(createCatDto);
+
+    return await this.catRepository.save(cat);
   }
 
   async findAll() {
